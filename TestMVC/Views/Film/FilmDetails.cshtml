@@ -21,4 +21,13 @@
         <dt>Release Day</dt>
         <dd>@Model.Release.ToShortDateString()</dd>
     </dl>
+    <h4>Categories:</h4>
+    <ul>
+        @foreach(var category in Model.Categories)
+        {
+            <li>@category.Category.Name</li>
+        }
+    </ul>
+
+    
 </div>

@@ -25,7 +25,10 @@ namespace TestMVC.Services
 
         public Film GetFilm(int id)
         {
-            return _dbContext.Films.FirstOrDefault(film => film.Id == id);
+            return _dbContext.Films
+                .Include(f => f.Categories)
+                .ThenInclude(cf => cf.Category)
+                .FirstOrDefault(film => film.Id == id);
         }
 
         public void CreateFilm(Film film)
