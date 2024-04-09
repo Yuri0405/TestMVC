@@ -1,0 +1,12 @@
+﻿@model TestMVC.Models.Category
+
+<h1>Edit Film</h1>
+
+<div id="partialZone">
+</div>
+<h2>Edit @Model.Name movie</h2>
+
+@{
+    ViewData["Action"] = "Edit";
+    await Html.RenderPartialAsync("~/Views/Category/_CategoryForm.cshtml", Model);
+}

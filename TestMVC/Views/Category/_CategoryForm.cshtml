@@ -1,0 +1,16 @@
+﻿@model TestMVC.Models.Category
+
+<form asp-action="@ViewData["Action"]" method="post">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ParentCategoryId" class="control-label"></label>
+        <input asp-for="ParentCategoryId" class="form-control" />
+        <span asp-validation-for="ParentCategoryId" class="text-danger"></span>
+    </div>
+    <!-- Add more input fields for other film properties -->
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

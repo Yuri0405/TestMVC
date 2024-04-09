@@ -13,6 +13,7 @@ namespace TestMVC.Services
         
         }
 
+        #region CRUD for Movies
         public List<Film> GetAllFilms()
         {
             var list = _dbContext.Films
@@ -53,5 +54,43 @@ namespace TestMVC.Services
             _dbContext.Films.Remove(filmToDelete);
             _dbContext.SaveChanges();
         }
+        #endregion
+
+        #region CRUD for Categories
+
+        public List<Category> GetAllCategories()
+        {
+            var list  = _dbContext.Categories.ToList();
+            return list;
+        }
+
+        public Category GetCategory(int id)
+        {
+            return _dbContext.Categories.FirstOrDefault(c => c.Id == id);
+        }
+
+        public void CreateCategory(Category category)
+        {
+            _dbContext.Categories.Add(category);
+            _dbContext.SaveChanges();
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            var categoryToUpdate = _dbContext.Categories.FirstOrDefault(c => c.Id == category.Id);
+            categoryToUpdate.Name = category.Name;
+            categoryToUpdate.ParentCategoryId = category.ParentCategoryId;
+
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteCategory(int id)
+        {
+            var categoryToDelete = _dbContext.Categories.FirstOrDefault(f => f.Id == id);
+            _dbContext.Remove(categoryToDelete);
+            _dbContext.SaveChanges();
+        }
+
+        #endregion
     }
 }
