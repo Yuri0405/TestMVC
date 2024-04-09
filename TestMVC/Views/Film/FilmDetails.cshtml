@@ -1,0 +1,24 @@
+﻿@using TestMVC.Models
+@model Film
+
+@{
+    ViewBag.Title = "Film Details";
+}
+
+<h2>Film Details</h2>
+
+<div>
+    <dl>
+        <dt>Id</dt>
+        <dd>@Model.Id</dd>
+
+        <dt>Name</dt>
+        <dd>@Model.Name</dd>
+
+        <dt>Director</dt>
+        <dd>@Model.Director</dd>
+
+        <dt>Release Day</dt>
+        <dd>@Model.Release.ToShortDateString()</dd>
+    </dl>
+</div>

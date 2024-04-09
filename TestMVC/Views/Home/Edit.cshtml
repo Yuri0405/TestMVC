@@ -1,0 +1,13 @@
+﻿@model TestMVC.Models.Film
+
+<h1>Edit Film</h1>
+
+<div id="partialZone">
+
+</div>
+
+@section Scripts{
+    <script>
+        $('#partialZone').load("/Home/FilmFormPartial")
+    </script>
+}

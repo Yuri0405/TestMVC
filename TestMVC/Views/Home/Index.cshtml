@@ -1,0 +1,60 @@
+﻿@using TestMVC.Models
+@model IEnumerable<Film>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var film in Model)
+        {
+            <tr>
+                <td><a href="@Url.Action("FilmDetails","Film",new {id = film.Id})">@film.Name</a></td>
+                <td>@film.Director</td>
+                <td>@film.Release.ToShortDateString()</td>
+                <td>
+                    <ul class="myList">
+                        @foreach (var category in film.Categories)
+                        {
+                            <li>@category.Category.Name</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@film.Id" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@film.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this film?');">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    // Get all lists with the class "myList"
+    const lists = document.querySelectorAll('.myList');
+
+    // Process each list
+    lists.forEach((list) => {
+        const items = list.querySelectorAll('li');
+
+        // Add commas dynamically
+        items.forEach((item, index) => {
+            if (index < items.length - 1) {
+                const comma = document.createTextNode(',');
+                list.insertBefore(comma, item.nextSibling);
+            }
+        });
+    });
+</script>
