@@ -26,6 +26,18 @@ namespace TestMVC.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Film film)
+        {
+            _repository.CreateFilm(film);
+            return RedirectToAction(nameof(Index));
+        }
 
         [HttpPost]
         public IActionResult Delete(int id)

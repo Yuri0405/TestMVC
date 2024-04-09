@@ -28,6 +28,12 @@ namespace TestMVC.Services
             return _dbContext.Films.FirstOrDefault(film => film.Id == id);
         }
 
+        public void CreateFilm(Film film)
+        {
+            _dbContext.Films.Add(film);
+            _dbContext.SaveChanges();
+        }
+
         public void EditFilm(Film film)
         {
             var filmToEdit = _dbContext.Films.FirstOrDefault(f => f.Id == film.Id);

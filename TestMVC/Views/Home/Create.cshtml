@@ -1,0 +1,8 @@
+﻿@model TestMVC.Models.Film
+
+<h1>Add new film</h1>
+
+@{
+    ViewData["Action"] = "Create";
+    await Html.RenderPartialAsync("~/Views/Home/_FilmForm.cshtml", Model);
+}
