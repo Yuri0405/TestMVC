@@ -34,12 +34,19 @@ namespace TestMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var filmToEdit = _repository.GetFilm(id);
             return View(filmToEdit);
         }
 
+        [HttpPost]
+        public IActionResult Edit(Film film)
+        {
+            _repository.EditFilm(film);
+            return RedirectToAction(nameof(Index));
+        }
         public IActionResult FilmFormPartial(Film film)
         {
             return PartialView("_FilmForm");

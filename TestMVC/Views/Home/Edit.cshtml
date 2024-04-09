@@ -5,9 +5,9 @@
 <div id="partialZone">
 
 </div>
+<h2>Edit @Model.Name movie</h2>
 
-@section Scripts{
-    <script>
-        $('#partialZone').load("/Home/FilmFormPartial")
-    </script>
+@{
+    ViewData["Action"] = "Edit";
+    await Html.RenderPartialAsync("~/Views/Home/_FilmForm.cshtml", Model);
 }
