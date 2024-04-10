@@ -15,8 +15,7 @@
         <tr>
             <th>Name</th>
             <th>Embeddedness level</th>
-            <th>Price</th>
-            <th>Category</th>
+            <th>Number of films in category</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +23,7 @@
         {
             <tr>
                 <td>@category.Name</td>
+                <td></td>
                 <td></td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@category.Id" class="btn btn-primary">Edit</a>

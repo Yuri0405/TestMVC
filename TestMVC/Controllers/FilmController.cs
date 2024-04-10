@@ -13,6 +13,7 @@ namespace TestMVC.Controllers
 
         public IActionResult FilmDetails(int id)
         {
+            ViewData["AvaibleCategories"] = _repository.GetAllCategories();
             var result = _repository.GetFilm(id);
 
             if (result == null)
@@ -21,6 +22,20 @@ namespace TestMVC.Controllers
             }
 
             return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult SetFilmToCategory(int filmId, int categoryId)
+        {
+            _repository.SetFilmToCategory(filmId, categoryId);
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult RemoveFilmFromCategory(int filmId, int categoryId)
+        {
+            _repository.RemoveFilmFromCategory(filmId, categoryId);
+            return Ok();
         }
     }
 }

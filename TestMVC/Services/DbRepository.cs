@@ -92,5 +92,20 @@ namespace TestMVC.Services
         }
 
         #endregion
+
+        #region CRUD for Category_film
+        public void SetFilmToCategory(int filmId,int categoryId)
+        {
+            _dbContext.Add(new FilmCategory { FilmId = filmId,CategoryId = categoryId });
+            _dbContext.SaveChanges();
+        }
+
+        public void RemoveFilmFromCategory(int filmId, int categoryId)
+        {
+            var categoryToRemove = _dbContext.FilmCategories.FirstOrDefault(r => r.FilmId == filmId && r.CategoryId == categoryId);
+            _dbContext.Remove(categoryToRemove);
+            _dbContext.SaveChanges();
+        }
+        #endregion
     }
 }
