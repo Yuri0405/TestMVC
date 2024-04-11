@@ -7,10 +7,12 @@ namespace TestMVC.Controllers
     public class CategoryController : Controller
     {
         private readonly DbRepository _repository;
+        private readonly CategoryService _categoryService;
 
-        public CategoryController(DbRepository repository)
+        public CategoryController(DbRepository repository, CategoryService categoryService)
         {
             _repository = repository;
+            _categoryService = categoryService;
         }
         public IActionResult Index()
         {
@@ -18,15 +20,20 @@ namespace TestMVC.Controllers
         }
 
         [HttpGet]
-
         public IActionResult Create()
         {
+            ViewBag.AvailableCategories = _repository.GetAllCategories();
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Category category)
         {
+            if (_categoryService.HasCircularDependency(category))
+            {
+                return BadRequest("Circular dependency detected");
+            }
+
             _repository.CreateCategory(category);
             return RedirectToAction(nameof(Index));
         }
@@ -34,6 +41,7 @@ namespace TestMVC.Controllers
         [HttpGet]
         public IActionResult Edit (int id)
         {
+            ViewBag.AvailableCategories = _repository.GetAllCategories();
             var categoryToEdit = _repository.GetCategory(id);
             return View(categoryToEdit);
         }
@@ -41,6 +49,10 @@ namespace TestMVC.Controllers
         [HttpPost]
         public IActionResult Edit(Category category)
         {
+            if (_categoryService.HasCircularDependency(category))
+            {
+                return BadRequest("Circular dependency detected");
+            }
             _repository.UpdateCategory(category);
             return RedirectToAction(nameof(Index));
         }

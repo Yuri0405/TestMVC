@@ -18,6 +18,7 @@ namespace TestMVC
             );
 
             builder.Services.AddTransient<DbRepository>();
+            builder.Services.AddTransient<CategoryService>();
 
             var app = builder.Build();
 

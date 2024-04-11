@@ -7,6 +7,7 @@ namespace TestMVC.Services
     public class DbRepository
     {
         private readonly AppDBContext _dbContext;
+        private readonly CategoryService _categoryService;
         public DbRepository(AppDBContext dBContext) 
         {
             _dbContext = dBContext;
