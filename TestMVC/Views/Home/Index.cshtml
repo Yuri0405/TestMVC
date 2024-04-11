@@ -10,13 +10,15 @@
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
 
-<table class="table">
+<table id="filmsTable" class="table">
     <thead>
         <tr>
             <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
+            <th>Director</th>
+            <th data-sort="date">Release date</th>
             <th>Category</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -64,3 +66,18 @@
         });
     });
 </script>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#filmsTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "columnDefs": [
+                    { "targets": [2], "type": "date" } // Specify date sorting for the 3rd column (index 2)
+                ]
+            });
+        });
+    </script>
+}
