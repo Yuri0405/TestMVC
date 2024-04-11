@@ -1,5 +1,5 @@
-﻿@using TestMVC.Models
-@model IEnumerable<Category>
+﻿@using TestMVC.Models.DTO
+@model IEnumerable<CategoryDTO>
 @{
     ViewData["Title"] = "Category Page";
 }
@@ -23,8 +23,8 @@
         {
             <tr>
                 <td>@category.Name</td>
-                <td></td>
-                <td></td>
+                <td>@category.InsertLevel</td>
+                <td>@category.MoviesCount</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@category.Id" class="btn btn-primary">Edit</a>
                 </td>

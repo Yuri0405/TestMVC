@@ -8,9 +8,10 @@ namespace TestMVC.Services
     {
         private readonly AppDBContext _dbContext;
         private readonly CategoryService _categoryService;
-        public DbRepository(AppDBContext dBContext) 
+        public DbRepository(AppDBContext dBContext, CategoryService categoryService) 
         {
             _dbContext = dBContext;
+            _categoryService = categoryService;
         
         }
 
@@ -58,11 +59,26 @@ namespace TestMVC.Services
         #endregion
 
         #region CRUD for Categories
-
         public List<Category> GetAllCategories()
         {
-            var list  = _dbContext.Categories.ToList();
+            var list = _dbContext.Categories.ToList();
             return list;
+        }
+        public List<CategoryDTO> GetAllCategoriesDTO()
+        {
+            var list  = _dbContext.Categories.ToList();
+            var dtoList = new List<CategoryDTO>(list.Count);
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                dtoList.Add(new CategoryDTO { });
+                dtoList[i].Id = list[i].Id;
+                dtoList[i].Name = list[i].Name;
+                dtoList[i].MoviesCount = _categoryService.FilmsInCategory(list[i]);
+                dtoList[i].InsertLevel = _categoryService.CategoryDepth(list[i]);
+            }
+            
+            return dtoList;
         }
 
         public Category GetCategory(int id)

@@ -16,13 +16,13 @@ namespace TestMVC.Controllers
         }
         public IActionResult Index()
         {
-            return View(_repository.GetAllCategories());
+            return View(_repository.GetAllCategoriesDTO());
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.AvailableCategories = _repository.GetAllCategories();
+            ViewBag.AvailableCategories = _repository.GetAllCategoriesDTO();
             return View();
         }
 
@@ -41,7 +41,7 @@ namespace TestMVC.Controllers
         [HttpGet]
         public IActionResult Edit (int id)
         {
-            ViewBag.AvailableCategories = _repository.GetAllCategories();
+            ViewBag.AvailableCategories = _repository.GetAllCategoriesDTO();
             var categoryToEdit = _repository.GetCategory(id);
             return View(categoryToEdit);
         }
